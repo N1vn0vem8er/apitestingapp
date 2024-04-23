@@ -1,0 +1,35 @@
+<div>
+    <mat-form-field style="width: 98%; margin: 1%;">
+        <mat-label>Url</mat-label>
+        <input matInput [(ngModel)]="requestUrl">
+    </mat-form-field>
+</div>
+<div class="req-send-container">
+    <mat-form-field style="margin: 10px;">
+        <mat-label>Request</mat-label>
+        <mat-select [(ngModel)]="reqFormControl">
+            <mat-option value="get">GET</mat-option>
+            <mat-option value="post">POST</mat-option>
+            <mat-option value="put">PUT</mat-option>
+            <mat-option value="patch">PATCH</mat-option>
+            <mat-option value="delete">DELETE</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button (click)="send()" style="margin: 10px;" *ngIf="requestUrl != '' && reqFormControl != ''">Send</button>
+    <span *ngIf="statusCode != ''">Status: {{statusCode}}</span>
+</div>
+<div class="req-container">
+    <mat-tab-group>
+        <mat-tab label="Request Body">
+            <div *ngIf="userJsonError" style="color: red;">Couldn't parse json</div>
+            <textarea [(ngModel)]="requestBody" [rows]="30" [cols]="240"></textarea>
+        </mat-tab>
+        <mat-tab label="Response Body"> <textarea [(ngModel)]="responseBody" readonly [rows]="30" [cols]="240"></textarea> </mat-tab>
+        <mat-tab label="Request Headers"> 
+            <div *ngIf="userJsonError" style="color: red;">Couldn't parse json</div>
+            <textarea [(ngModel)]="requestHeaders" [rows]="30" [cols]="240"></textarea>
+        </mat-tab>
+        <mat-tab label="Response Headers"> <textarea [(ngModel)]="responseHeaders" readonly [rows]="30" [cols]="240"></textarea> </mat-tab>
+      </mat-tab-group>      
+</div>
+
